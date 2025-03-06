@@ -59,4 +59,17 @@ function highlightHighPriorityTickets() {
 // Call function to highlight tickets 
 highlightHighPriorityTickets();
 
+// Task 4 - Implementing Ticket Resolution with Event Bubbling
+
+document.getElementById("ticketContainer").addEventListener("click", function(event) {
+    console.log("Ticket clicked!");
+});
+
+// Remove ticket on "Resolve" button click
+document.getElementById("ticketContainer").addEventListener("click", function(event) {
+    if (event.target.classList.contains("resolve-btn")) {
+        event.target.parentElement.remove();
+        event.stopPropagation(); // Prevent bubbling
+    }
+});
 
