@@ -73,3 +73,51 @@ document.getElementById("ticketContainer").addEventListener("click", function(ev
     }
 });
 
+// Task 5 - Additional Challenge – Inline Editing of Support Tickets
+
+document.getElementById("ticketContainer").addEventListener("dblclick", function(event) {
+    let ticket = event.target.closest(".ticket");
+    if (!ticket) return;
+
+    let name = ticket.querySelector("h3");
+    let issue = ticket.querySelector("p");
+    let priority = ticket.querySelector(".priority");
+
+    // Create input fields
+    let nameInput = document.createElement("input");
+    nameInput.value = name.textContent;
+
+    let issueInput = document.createElement("input");
+    issueInput.value = issue.textContent;
+
+    let priorityInput = document.createElement("select");
+    ["High", "Medium", "Low"].forEach(level => {
+        let option = document.createElement("option");
+        option.value = level;
+        option.textContent = level;
+        if (priority.textContent.includes(level)) option.selected = true;
+        priorityInput.appendChild(option);
+    });
+
+    // Save button
+    let saveBtn = document.createElement("button");
+    saveBtn.textContent = "Save";
+    saveBtn.addEventListener("click", function() {
+        name.textContent = nameInput.value;
+        issue.textContent = issueInput.value;
+        priority.textContent = `Priority: ${priorityInput.value}`;
+        
+        // Replace input fields with updated text
+        ticket.replaceChild(name, nameInput);
+        ticket.replaceChild(issue, issueInput);
+        ticket.replaceChild(priority, priorityInput);
+        ticket.removeChild(saveBtn);
+    });
+
+    // Replace text with input fields
+    ticket.replaceChild(nameInput, name);
+    ticket.replaceChild(issueInput, issue);
+    ticket.replaceChild(priorityInput, priority);
+    ticket.appendChild(saveBtn);
+});
+
