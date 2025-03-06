@@ -44,3 +44,19 @@ function addTicket() {
     document.getElementById("ticketContainer").appendChild(ticket);
 }
 
+// Task 3 - Converting NodeLists to Arrays for Bulk Updates
+
+function highlightHighPriorityTickets() {
+    let highPriorityTickets = document.querySelectorAll(".high-priority");
+    let ticketsArray = Array.from(highPriorityTickets);
+    
+    ticketsArray.forEach(ticket => {
+        ticket.style.border = "2px solid red";
+        ticket.style.backgroundColor = "#ffcccc";
+    });
+}
+
+// Call function to highlight tickets 
+highlightHighPriorityTickets();
+
+
